@@ -64,6 +64,7 @@ public partial class App : Application
         services.AddSingleton<IFileService, FileService>();
 
         // Services
+        services.AddSingleton<IWindowManagerService, WindowManagerService>();
         services.AddSingleton<IApplicationInfoService, ApplicationInfoService>();
         services.AddSingleton<ISystemService, SystemService>();
         services.AddSingleton<IPersistAndRestoreService, PersistAndRestoreService>();
@@ -90,6 +91,9 @@ public partial class App : Application
 
         services.AddTransient<SettingsViewModel>();
         services.AddTransient<SettingsPage>();
+
+        services.AddTransient<IShellDialogWindow, ShellDialogWindow>();
+        services.AddTransient<ShellDialogViewModel>();
 
         // Configuration
         services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));
