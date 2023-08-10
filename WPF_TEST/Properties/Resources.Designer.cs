@@ -142,6 +142,28 @@ namespace WPF_TEST.Properties {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to ContentGrid.
+        /// </summary>
+        public static string ContentGridPageTitle
+        {
+            get
+            {
+                return ResourceManager.GetString("ContentGridPageTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to ContentGrid.
+        /// </summary>
+        public static string ShellContentGridPage
+        {
+            get
+            {
+                return ResourceManager.GetString("ShellContentGridPage", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Settings page placeholder text.  Your app description goes here..
         /// </summary>
         public static string SettingsPageAboutText

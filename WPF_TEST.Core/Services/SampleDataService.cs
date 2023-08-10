@@ -486,6 +486,13 @@ public class SampleDataService : ISampleDataService
         };
     }
 
+    // Remove this once your ContentGrid pages are displaying real data.
+    public async Task<IEnumerable<SampleOrder>> GetContentGridDataAsync()
+    {
+        await Task.CompletedTask;
+        return AllOrders();
+    }
+
     // Remove this once your ListDetails pages are displaying real data.
     public async Task<IEnumerable<SampleOrder>> GetListDetailsDataAsync()
     {

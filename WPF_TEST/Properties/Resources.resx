@@ -30,6 +30,12 @@
     <data name="SettingsPageRadioButtonWindowsDefaultTheme" xml:space="preserve">
         <value>Default</value>
     </data>
+    <data name="ShellContentGridPage" xml:space="preserve">
+		    <value>ContentGrid</value>
+    </data>
+    <data name="ContentGridPageTitle" xml:space="preserve">
+		    <value>ContentGrid</value>
+    </data>
     <data name="ShellListDetailsPage" xml:space="preserve">
 		    <value>ListDetails</value>
     </data>

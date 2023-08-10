@@ -18,6 +18,8 @@ public class PageService : IPageService
         _serviceProvider = serviceProvider;
         Configure<MainViewModel, MainPage>();
         Configure<ListDetailsViewModel, ListDetailsPage>();
+        Configure<ContentGridViewModel, ContentGridPage>();
+        Configure<ContentGridDetailViewModel, ContentGridDetailPage>();
         Configure<SettingsViewModel, SettingsPage>();
     }
 
