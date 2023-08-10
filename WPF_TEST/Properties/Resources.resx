@@ -30,6 +30,15 @@
     <data name="SettingsPageRadioButtonWindowsDefaultTheme" xml:space="preserve">
         <value>Default</value>
     </data>
+    <data name="ShellListDetailsPage" xml:space="preserve">
+		    <value>ListDetails</value>
+    </data>
+    <data name="ListDetailsPageTitle" xml:space="preserve">
+		    <value>ListDetails</value>
+    </data>
+    <data name="ListDetailsListDescription" xml:space="preserve">
+		    <value>Sample Orders</value>
+    </data>
     <data name="ShellMainPage" xml:space="preserve">
 		    <value>Main</value>
     </data>

@@ -68,6 +68,7 @@ public partial class App : Application
         services.AddSingleton<ISystemService, SystemService>();
         services.AddSingleton<IPersistAndRestoreService, PersistAndRestoreService>();
         services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
+        services.AddSingleton<ISampleDataService, SampleDataService>();
         services.AddSingleton<IPageService, PageService>();
         services.AddSingleton<INavigationService, NavigationService>();
 
@@ -77,6 +78,9 @@ public partial class App : Application
 
         services.AddTransient<MainViewModel>();
         services.AddTransient<MainPage>();
+
+        services.AddTransient<ListDetailsViewModel>();
+        services.AddTransient<ListDetailsPage>();
 
         services.AddTransient<SettingsViewModel>();
         services.AddTransient<SettingsPage>();

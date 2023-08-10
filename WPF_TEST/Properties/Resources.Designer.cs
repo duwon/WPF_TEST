@@ -109,6 +109,39 @@ namespace WPF_TEST.Properties {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Sample Orders.
+        /// </summary>
+        public static string ListDetailsListDescription
+        {
+            get
+            {
+                return ResourceManager.GetString("ListDetailsListDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to ListDetails.
+        /// </summary>
+        public static string ListDetailsPageTitle
+        {
+            get
+            {
+                return ResourceManager.GetString("ListDetailsPageTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to ListDetails.
+        /// </summary>
+        public static string ShellListDetailsPage
+        {
+            get
+            {
+                return ResourceManager.GetString("ShellListDetailsPage", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Settings page placeholder text.  Your app description goes here..
         /// </summary>
         public static string SettingsPageAboutText
