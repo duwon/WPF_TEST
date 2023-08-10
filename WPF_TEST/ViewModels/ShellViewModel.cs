@@ -15,8 +15,10 @@ public class ShellViewModel : ObservableObject
 {
     private readonly INavigationService _navigationService;
     private HamburgerMenuItem _selectedMenuItem;
+    private HamburgerMenuItem _selectedOptionsMenuItem;
     private RelayCommand _goBackCommand;
     private ICommand _menuItemInvokedCommand;
+    private ICommand _optionsMenuItemInvokedCommand;
     private ICommand _loadedCommand;
     private ICommand _unloadedCommand;
 
@@ -26,15 +28,28 @@ public class ShellViewModel : ObservableObject
         set { SetProperty(ref _selectedMenuItem, value); }
     }
 
+    public HamburgerMenuItem SelectedOptionsMenuItem
+    {
+        get { return _selectedOptionsMenuItem; }
+        set { SetProperty(ref _selectedOptionsMenuItem, value); }
+    }
+
     // TODO: Change the icons and titles for all HamburgerMenuItems here.
     public ObservableCollection<HamburgerMenuItem> MenuItems { get; } = new ObservableCollection<HamburgerMenuItem>()
     {
         new HamburgerMenuGlyphItem() { Label = Resources.ShellMainPage, Glyph = "\uE8A5", TargetPageType = typeof(MainViewModel) },
     };
 
+    public ObservableCollection<HamburgerMenuItem> OptionMenuItems { get; } = new ObservableCollection<HamburgerMenuItem>()
+    {
+        new HamburgerMenuGlyphItem() { Label = Resources.ShellSettingsPage, Glyph = "\uE713", TargetPageType = typeof(SettingsViewModel) }
+    };
+
     public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(OnGoBack, CanGoBack));
 
     public ICommand MenuItemInvokedCommand => _menuItemInvokedCommand ?? (_menuItemInvokedCommand = new RelayCommand(OnMenuItemInvoked));
+
+    public ICommand OptionsMenuItemInvokedCommand => _optionsMenuItemInvokedCommand ?? (_optionsMenuItemInvokedCommand = new RelayCommand(OnOptionsMenuItemInvoked));
 
     public ICommand LoadedCommand => _loadedCommand ?? (_loadedCommand = new RelayCommand(OnLoaded));
 
@@ -64,6 +79,9 @@ public class ShellViewModel : ObservableObject
     private void OnMenuItemInvoked()
         => NavigateTo(SelectedMenuItem.TargetPageType);
 
+    private void OnOptionsMenuItemInvoked()
+        => NavigateTo(SelectedOptionsMenuItem.TargetPageType);
+
     private void NavigateTo(Type targetViewModel)
     {
         if (targetViewModel != null)
@@ -80,6 +98,12 @@ public class ShellViewModel : ObservableObject
         if (item != null)
         {
             SelectedMenuItem = item;
+        }
+        else
+        {
+            SelectedOptionsMenuItem = OptionMenuItems
+                    .OfType<HamburgerMenuItem>()
+                    .FirstOrDefault(i => viewModelName == i.TargetPageType?.FullName);
         }
 
         GoBackCommand.NotifyCanExecuteChanged();

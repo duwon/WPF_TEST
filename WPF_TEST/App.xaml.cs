@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 
 using WPF_TEST.Contracts.Services;
 using WPF_TEST.Contracts.Views;
+using WPF_TEST.Core.Contracts.Services;
+using WPF_TEST.Core.Services;
 using WPF_TEST.Models;
 using WPF_TEST.Services;
 using WPF_TEST.ViewModels;
@@ -59,8 +61,13 @@ public partial class App : Application
         // Activation Handlers
 
         // Core Services
+        services.AddSingleton<IFileService, FileService>();
 
         // Services
+        services.AddSingleton<IApplicationInfoService, ApplicationInfoService>();
+        services.AddSingleton<ISystemService, SystemService>();
+        services.AddSingleton<IPersistAndRestoreService, PersistAndRestoreService>();
+        services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
         services.AddSingleton<IPageService, PageService>();
         services.AddSingleton<INavigationService, NavigationService>();
 
@@ -70,6 +77,9 @@ public partial class App : Application
 
         services.AddTransient<MainViewModel>();
         services.AddTransient<MainPage>();
+
+        services.AddTransient<SettingsViewModel>();
+        services.AddTransient<SettingsPage>();
 
         // Configuration
         services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));
