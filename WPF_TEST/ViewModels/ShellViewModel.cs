@@ -1,20 +1,40 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
+using MahApps.Metro.Controls;
+
 using WPF_TEST.Contracts.Services;
+using WPF_TEST.Properties;
 
 namespace WPF_TEST.ViewModels;
 
 public class ShellViewModel : ObservableObject
 {
     private readonly INavigationService _navigationService;
+    private HamburgerMenuItem _selectedMenuItem;
     private RelayCommand _goBackCommand;
-    private RelayCommand _loadedCommand;
-    private RelayCommand _unloadedCommand;
+    private ICommand _menuItemInvokedCommand;
+    private ICommand _loadedCommand;
+    private ICommand _unloadedCommand;
+
+    public HamburgerMenuItem SelectedMenuItem
+    {
+        get { return _selectedMenuItem; }
+        set { SetProperty(ref _selectedMenuItem, value); }
+    }
+
+    // TODO: Change the icons and titles for all HamburgerMenuItems here.
+    public ObservableCollection<HamburgerMenuItem> MenuItems { get; } = new ObservableCollection<HamburgerMenuItem>()
+    {
+        new HamburgerMenuGlyphItem() { Label = Resources.ShellMainPage, Glyph = "\uE8A5", TargetPageType = typeof(MainViewModel) },
+    };
 
     public RelayCommand GoBackCommand => _goBackCommand ?? (_goBackCommand = new RelayCommand(OnGoBack, CanGoBack));
+
+    public ICommand MenuItemInvokedCommand => _menuItemInvokedCommand ?? (_menuItemInvokedCommand = new RelayCommand(OnMenuItemInvoked));
 
     public ICommand LoadedCommand => _loadedCommand ?? (_loadedCommand = new RelayCommand(OnLoaded));
 
@@ -41,6 +61,27 @@ public class ShellViewModel : ObservableObject
     private void OnGoBack()
         => _navigationService.GoBack();
 
+    private void OnMenuItemInvoked()
+        => NavigateTo(SelectedMenuItem.TargetPageType);
+
+    private void NavigateTo(Type targetViewModel)
+    {
+        if (targetViewModel != null)
+        {
+            _navigationService.NavigateTo(targetViewModel.FullName);
+        }
+    }
+
     private void OnNavigated(object sender, string viewModelName)
-        => GoBackCommand.NotifyCanExecuteChanged();
+    {
+        var item = MenuItems
+                    .OfType<HamburgerMenuItem>()
+                    .FirstOrDefault(i => viewModelName == i.TargetPageType?.FullName);
+        if (item != null)
+        {
+            SelectedMenuItem = item;
+        }
+
+        GoBackCommand.NotifyCanExecuteChanged();
+    }
 }

@@ -78,6 +78,15 @@ namespace WPF_TEST.Properties {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to ShellHamburgerButtonName.
+        /// </summary>
+        public static string ShellHamburgerButtonName {
+            get {
+                return ResourceManager.GetString("ShellHamburgerButtonName", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Main.
         /// </summary>
         public static string MainPageTitle
@@ -85,6 +94,17 @@ namespace WPF_TEST.Properties {
             get
             {
                 return ResourceManager.GetString("MainPageTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Main.
+        /// </summary>
+        public static string ShellMainPage
+        {
+            get
+            {
+                return ResourceManager.GetString("ShellMainPage", resourceCulture);
             }
         }
     }
